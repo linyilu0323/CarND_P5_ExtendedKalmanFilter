@@ -86,6 +86,12 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
                  rho * sin(phi),
                  rhodot * cos(phi),
                  rhodot * sin(phi);
+
+      ekf_.P_ << 1, 0, 0, 0,
+                 0, 1, 0, 0,
+                 0, 0, 1, 0,
+                 0, 0, 0, 1;
+
       previous_timestamp_ = measurement_pack.timestamp_;
       is_initialized_ = true;
       return;
